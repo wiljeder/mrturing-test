@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "dev": "deno task backend:dev",
+    "start": "deno task backend:start",
+    "backend:dev": "cd backend && deno task dev",
+    "backend:start": "cd backend && deno task start"
+  }
+}
