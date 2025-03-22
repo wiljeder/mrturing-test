@@ -6,14 +6,19 @@ export const createUserSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
-export const updateUserSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").optional(),
-  email: z.string().email("Invalid email format").optional(),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters")
-    .optional(),
-});
+export const updateUserSchema = z
+  .object({
+    name: z.string().min(2, "Name must be at least 2 characters").optional(),
+    email: z.string().email("Invalid email format").optional(),
+    password: z
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .optional(),
+  })
+  .refine((data) => Object.keys(data).length > 0, {
+    message: "At least one field must be provided",
+    path: ["*"],
+  });
 
 export const userResponseSchema = z.object({
   id: z.number(),
@@ -30,9 +35,7 @@ export const userQuerySchema = z.object({
   email: z.string().optional(),
 });
 
-export const batchDeleteSchema = z.object({
-  ids: z.array(z.number()),
-});
+export const batchDeleteSchema = z.array(z.number()).nonempty();
 
 export type TCreateUserSchema = z.infer<typeof createUserSchema>;
 export type TUpdateUserSchema = z.infer<typeof updateUserSchema>;

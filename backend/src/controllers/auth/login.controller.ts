@@ -31,7 +31,7 @@ export async function loginController(c: Context) {
 
     const [userData] = user;
 
-    if (!comparePassword(userData.password, password)) {
+    if (!(await comparePassword(password, userData.password))) {
       return c.json({ message: "Invalid credentials" }, 401);
     }
 
