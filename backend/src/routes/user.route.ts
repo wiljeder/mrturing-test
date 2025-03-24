@@ -1,18 +1,16 @@
 import { Hono } from "hono";
 import { createUserController } from "../controllers/users/createUser.controller.ts";
-import {
-  authMiddleware,
-  jwtMiddleware,
-} from "../middlewares/auth.middleware.ts";
 import { getUsersController } from "../controllers/users/getUsers.controller.ts";
 import { updateUserController } from "../controllers/users/updateUser.controller.ts";
-import { deleteUsersController } from "../controllers/users/deleteUsers.controller.ts";
+import { getMyUserController } from "../controllers/users/getMyUser.controller.ts";
+import { deleteUserController } from "../controllers/users/deleteUser.controller.ts";
+import { userMiddleware } from "../middlewares/auth.middleware.ts";
 
 export const userRoutes = new Hono();
 
 userRoutes.post("/", createUserController);
-userRoutes.put("/:userId", updateUserController);
-userRoutes.delete("/", deleteUsersController);
-
-userRoutes.use("/*", jwtMiddleware, authMiddleware);
 userRoutes.get("/", getUsersController);
+
+userRoutes.get("/me", userMiddleware, getMyUserController);
+userRoutes.put("/", userMiddleware, updateUserController);
+userRoutes.delete("/", userMiddleware, deleteUserController);

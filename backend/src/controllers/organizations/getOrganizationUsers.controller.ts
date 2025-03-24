@@ -1,10 +1,10 @@
 import { Context } from "hono";
-import { userQuerySchema } from "../../models/users.model.ts";
-import { and, ilike } from "drizzle-orm/expressions";
-import { users } from "../../db/schema/index.ts";
+import { and, eq, ilike, inArray } from "drizzle-orm/expressions";
+import { userOrganizations, users } from "../../db/schema/index.ts";
 import { db } from "../../db/index.ts";
+import { organizationUserQuerySchema } from "../../models/organizations.model.ts";
 
-export async function getUsersController(c: Context) {
+export async function getOrganizationUsersController(c: Context) {
   try {
     const reqQuery = {
       page: c.req.query("page"),
@@ -13,7 +13,7 @@ export async function getUsersController(c: Context) {
       email: c.req.query("email"),
     };
 
-    const result = userQuerySchema.safeParse(reqQuery);
+    const result = organizationUserQuerySchema.safeParse(reqQuery);
 
     if (!result.success) {
       return c.json(
@@ -33,13 +33,33 @@ export async function getUsersController(c: Context) {
       conditions.push(ilike(users.email, `%${query.email}%`));
     }
 
-    const usersList = await db
+    const activeOrganizationId = c.get("activeOrganizationId");
+
+    if (!activeOrganizationId) {
+      return c.json({ message: "No active organization" }, 400);
+    }
+
+    let usersList = [];
+    let totalCount: number = 0;
+
+    const userIdsQuery = await db
+      .select({ userId: userOrganizations.userId })
+      .from(userOrganizations)
+      .where(eq(userOrganizations.organizationId, activeOrganizationId));
+
+    const userIds = userIdsQuery.map((user) => user.userId);
+
+    usersList = await db
       .select()
       .from(users)
-      .where(and(...conditions))
+      .where(and(...conditions, inArray(users.id, userIds)))
       .limit(query.limit)
       .offset(offset);
-    const totalCount = await db.$count(users, and(...conditions));
+
+    totalCount = await db.$count(
+      users,
+      and(...conditions, inArray(users.id, userIds))
+    );
 
     const usersWithoutPassword = usersList.map(
       ({ password: _, ...user }) => user
@@ -55,7 +75,7 @@ export async function getUsersController(c: Context) {
       },
     });
   } catch (error) {
-    console.error("Error getting users:", error);
+    console.error("Error getting organization users:", error);
     return c.json({ message: "Internal server error" }, 500);
   }
 }

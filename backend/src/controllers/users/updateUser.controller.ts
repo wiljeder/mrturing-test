@@ -19,8 +19,6 @@ export async function updateUserController(c: Context) {
 
     const userData = result.data;
 
-    console.log("userData", userData);
-
     const userId = parseInt(c.req.param("userId"));
     const user = await db.select().from(users).where(eq(users.id, userId));
 
@@ -36,10 +34,7 @@ export async function updateUserController(c: Context) {
 
     const { password: _, ...updatedUserWithoutPassword } = updatedUser;
 
-    return c.json({
-      message: "User updated successfully",
-      user: updatedUserWithoutPassword,
-    });
+    return c.json(updatedUserWithoutPassword, 200);
   } catch (error) {
     console.error("Error updating user:", error);
     return c.json({ message: "Internal server error" }, 500);

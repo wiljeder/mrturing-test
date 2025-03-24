@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { paginationSchema } from "./pagination.model.ts";
 
 export const createUserSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -28,9 +29,7 @@ export const userResponseSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const userQuerySchema = z.object({
-  page: z.coerce.number().int().min(1).default(1),
-  limit: z.coerce.number().int().min(1).max(100).default(10),
+export const userQuerySchema = paginationSchema.extend({
   name: z.string().optional(),
   email: z.string().optional(),
 });

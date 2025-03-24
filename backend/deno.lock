@@ -2,6 +2,7 @@
   "version": "4",
   "specifiers": {
     "jsr:@hono/hono@^4.7.5": "4.7.5",
+    "npm:@hono/swagger-ui@~0.5.1": "0.5.1_hono@4.7.5",
     "npm:@types/node@*": "22.12.0",
     "npm:@types/pg@^8.11.11": "8.11.11",
     "npm:drizzle-kit@*": "0.30.5_esbuild@0.19.12",
@@ -169,6 +170,12 @@
     "@esbuild/win32-x64@0.19.12": {
       "integrity": "sha512-T1QyPSDCyMXaO3pzBkF96E8xMkiRYbUEZADd29SyPGabqxMViNoii+NcK7eWJAEoU6RZyEm5lVSIjTmcdoB9HA=="
     },
+    "@hono/swagger-ui@0.5.1_hono@4.7.5": {
+      "integrity": "sha512-XpUCfszLJ9b1rtFdzqOSHfdg9pfBiC2J5piEjuSanYpDDTIwpMz0ciiv5N3WWUaQpz9fEgH8lttQqL41vIFuDA==",
+      "dependencies": [
+        "hono"
+      ]
+    },
     "@petamoriken/float16@3.9.2": {
       "integrity": "sha512-VgffxawQde93xKxT3qap3OH+meZf7VaSB5Sqd4Rqc+FP5alWbpOyan/7tRbOAvynjpG3GpdtAuGU/NdhQpmrog=="
     },
@@ -292,6 +299,9 @@
       "dependencies": [
         "resolve-pkg-maps"
       ]
+    },
+    "hono@4.7.5": {
+      "integrity": "sha512-fDOK5W2C1vZACsgLONigdZTRZxuBqFtcKh7bUQ5cVSbwI2RWjloJDcgFOVzbQrlI6pCmhlTsVYZ7zpLj4m4qMQ=="
     },
     "isexe@3.1.1": {
       "integrity": "sha512-LpB/54B+/2J5hqQ7imZHfdU31OlgQqx7ZicVlkm9kzg9/w8GKLEcFfJl/t7DCEDueOyBAD6zCCwTO6Fzs0NoEQ=="
@@ -442,6 +452,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@hono/hono@^4.7.5",
+      "npm:@hono/swagger-ui@~0.5.1",
       "npm:@types/pg@^8.11.11",
       "npm:drizzle-kit@~0.30.5",
       "npm:drizzle-orm@0.41",

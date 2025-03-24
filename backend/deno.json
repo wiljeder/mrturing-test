@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@hono/swagger-ui": "npm:@hono/swagger-ui@^0.5.1",
     "@types/pg": "npm:@types/pg@^8.11.11",
     "drizzle-kit": "npm:drizzle-kit@^0.30.5",
     "drizzle-orm": "npm:drizzle-orm@^0.41.0",

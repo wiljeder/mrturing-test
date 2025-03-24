@@ -40,19 +40,9 @@ export async function createUserController(c: Context) {
       })
       .returning();
 
-    return c.json(
-      {
-        message: "User created successfully",
-        user: {
-          id: newUser.id,
-          name: newUser.name,
-          email: newUser.email,
-          createdAt: newUser.createdAt,
-          updatedAt: newUser.updatedAt,
-        },
-      },
-      201
-    );
+    const { password: _, ...user } = newUser;
+
+    return c.json(user, 201);
   } catch (error) {
     console.error("Error creating user:", error);
     return c.json({ message: "Internal server error" }, 500);
