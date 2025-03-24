@@ -39,3 +39,12 @@ export const useUserStore = create<UserState>()(
     }
   )
 );
+
+export const resetUserStore = () => {
+  useUserStore.setState({
+    token: null,
+    user: null,
+    isAuthenticated: false,
+    activeOrganizationId: null,
+  });
+};

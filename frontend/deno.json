@@ -14,5 +14,8 @@
     "generate-routes": "tsr generate",
     "dev": "deno run -A npm:concurrently \"deno task watch-routes\" \"vite\"",
     "build": "deno task generate-routes && vite build"
+  },
+  "imports": {
+    "@/": "./src/"
   }
 }

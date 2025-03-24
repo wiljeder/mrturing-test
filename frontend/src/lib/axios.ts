@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useUserStore } from "../stores/user.store.ts";
 
-const baseURL = "http://localhost:3000";
-
 export const axiosInstance = axios.create({
-  baseURL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

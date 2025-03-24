@@ -3,7 +3,7 @@ import { CreateUserRequest } from "../../types/index.ts";
 import { axiosInstance } from "../../lib/axios.ts";
 
 const register = async (data: CreateUserRequest) => {
-  const response = await axiosInstance.post("/api/users", data);
+  const response = await axiosInstance.post("/users", data);
   return response.data;
 };
 
