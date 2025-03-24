@@ -59,7 +59,6 @@ export async function loginController(c: Context) {
     const token = await sign(userPayload, Deno.env.get("JWT_SECRET") as string);
 
     return c.json({
-      message: "Login successful",
       token,
       user: userPayload,
     });
