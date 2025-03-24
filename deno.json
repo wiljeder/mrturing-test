@@ -1,8 +1,12 @@
 {
   "tasks": {
-    "dev": "deno task backend:dev",
+    "dev": "deno run -A npm:concurrently \"deno task backend:dev\" \"deno task frontend:dev\"",
     "start": "deno task backend:start",
     "backend:dev": "cd backend && deno task dev",
-    "backend:start": "cd backend && deno task start"
+    "backend:start": "cd backend && deno task start",
+    "frontend:dev": "cd frontend && deno task dev"
+  },
+  "imports": {
+    "concurrently": "npm:concurrently@^9.1.2"
   }
 }
