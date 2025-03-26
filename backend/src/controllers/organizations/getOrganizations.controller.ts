@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import { db } from "../../db/index.ts";
 import { organizations, userOrganizations } from "../../db/schema/index.ts";
-import { eq } from "drizzle-orm/expressions";
+import { desc, eq } from "drizzle-orm/expressions";
 import { paginationSchema } from "../../models/pagination.model.ts";
 
 export async function getOrganizationsController(c: Context) {
@@ -36,6 +36,7 @@ export async function getOrganizationsController(c: Context) {
         eq(userOrganizations.organizationId, organizations.id)
       )
       .where(eq(userOrganizations.userId, userId))
+      .orderBy(desc(userOrganizations.isActive))
       .limit(query.limit)
       .offset(offset);
 
@@ -44,12 +45,14 @@ export async function getOrganizationsController(c: Context) {
       eq(userOrganizations.userId, userId)
     );
 
+    const formattedAndOrderedOrgs = userOrgs.map((item) => ({
+      ...item.organization,
+      isActive: item.isActive,
+    }));
+
     return c.json(
       {
-        organizations: userOrgs.map((item) => ({
-          ...item.organization,
-          isActive: item.isActive,
-        })),
+        organizations: formattedAndOrderedOrgs,
         pagination: {
           page: query.page,
           limit: query.limit,

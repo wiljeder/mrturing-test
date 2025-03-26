@@ -94,7 +94,7 @@ async function seed() {
     for (let i = 0; i < userOrgs.length; i++) {
       const org = userOrgs[i];
 
-      const isActive = org.ownerId === user.id || i === activeOrgIndex;
+      const isActive = i === activeOrgIndex;
 
       await db
         .insert(userOrganizations)
