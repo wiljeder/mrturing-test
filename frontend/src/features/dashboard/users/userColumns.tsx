@@ -70,10 +70,6 @@ export function getUserColumns({
       accessorKey: "createdAt",
     },
     {
-      header: "Updated At",
-      accessorKey: "updatedAt",
-    },
-    {
       id: "actions",
       cell: ({ row }) => {
         const user = row.original as User;

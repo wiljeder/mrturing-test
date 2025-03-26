@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
   const hasRowSelection = selection !== undefined;
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-4">
       <div className="rounded-md border">
         <Table>
           <TableHeader>

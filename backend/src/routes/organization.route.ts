@@ -11,6 +11,7 @@ import {
   organizationMiddleware,
   organizationOwnerMiddleware,
 } from "../middlewares/auth.middleware.ts";
+import { deleteOrganizationUsersController } from "../controllers/organizations/deleteOrganizationUsers.controller.ts";
 
 export const organizationRoutes = new Hono();
 
@@ -46,5 +47,5 @@ organizationRoutes.post(
 organizationRoutes.delete(
   "/users",
   organizationOwnerMiddleware,
-  deleteOrganizationController
+  deleteOrganizationUsersController
 );

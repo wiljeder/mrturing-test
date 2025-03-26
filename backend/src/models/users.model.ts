@@ -34,7 +34,9 @@ export const userQuerySchema = paginationSchema.extend({
   email: z.string().optional(),
 });
 
-export const batchDeleteSchema = z.array(z.number()).nonempty();
+export const batchDeleteSchema = z.object({
+  ids: z.array(z.number()).nonempty(),
+});
 
 export type TCreateUserSchema = z.infer<typeof createUserSchema>;
 export type TUpdateUserSchema = z.infer<typeof updateUserSchema>;

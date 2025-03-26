@@ -1,11 +1,7 @@
 import { Context } from "hono";
 import { batchDeleteSchema } from "../../models/users.model.ts";
 import { and, eq, inArray, ne } from "drizzle-orm/expressions";
-import {
-  organizations,
-  userOrganizations,
-  users,
-} from "../../db/schema/index.ts";
+import { organizations, userOrganizations } from "../../db/schema/index.ts";
 import { db } from "../../db/index.ts";
 
 export async function deleteOrganizationUsersController(c: Context) {
@@ -49,7 +45,7 @@ export async function deleteOrganizationUsersController(c: Context) {
       );
     }
 
-    const ids = result.data;
+    const ids = result.data.ids;
 
     const deletedUsersCount = (
       await db
@@ -58,7 +54,7 @@ export async function deleteOrganizationUsersController(c: Context) {
           and(
             ne(userOrganizations.userId, userId),
             eq(userOrganizations.organizationId, organizationId),
-            inArray(users.id, ids)
+            inArray(userOrganizations.userId, ids)
           )
         )
     ).rowCount;

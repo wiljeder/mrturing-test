@@ -97,7 +97,8 @@ export function Organizations() {
             data={organizationsData?.organizations ?? []}
             columns={getOrganizationColumns({
               navigate,
-              setActiveOrganization: (id) => setActiveOrganization.mutate(id),
+              setActiveOrganization: async (id) =>
+                await setActiveOrganization.mutate(id),
               deleteOrganization: handleDeleteOrganization,
             })}
             pagination={pagination}

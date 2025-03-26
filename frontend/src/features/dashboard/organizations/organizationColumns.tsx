@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx";
-import { Eye, MoreHorizontal, Trash } from "lucide-react";
+import { Check, Eye, MoreHorizontal, Trash } from "lucide-react";
 import { UseNavigateResult } from "@tanstack/react-router";
 import { useState } from "react";
 import { DeleteOrganizationDialog } from "./DeleteOrganizationDialog.tsx";
@@ -19,7 +19,7 @@ export function getOrganizationColumns({
   setActiveOrganization,
 }: {
   navigate: UseNavigateResult<string>;
-  setActiveOrganization: (id: number) => void;
+  setActiveOrganization: (id: number) => Promise<void>;
 }): ColumnDef<Organization>[] {
   const DropdownActions = ({
     organization,
@@ -39,9 +39,11 @@ export function getOrganizationColumns({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem
-              onClick={() =>
-                navigate({ to: `/organizations/${organization.id}` })
-              }
+              onClick={async () => {
+                await setActiveOrganization(organization.id);
+
+                navigate({ to: `/organizations/${organization.id}` });
+              }}
             >
               <Eye className="h-4 w-4 mr-2" />
               View
@@ -49,6 +51,7 @@ export function getOrganizationColumns({
             <DropdownMenuItem
               onClick={() => setActiveOrganization(organization.id)}
             >
+              <Check className="h-4 w-4 mr-2" />
               Set Active
             </DropdownMenuItem>
             {organization.isActive && (
