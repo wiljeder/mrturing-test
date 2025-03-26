@@ -1,12 +1,6 @@
 import { z } from "zod";
 import { paginationSchema } from "./pagination.model.ts";
 
-export const createUserSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email format"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
 export const updateUserSchema = z
   .object({
     name: z.string().min(2, "Name must be at least 2 characters").optional(),
@@ -38,7 +32,6 @@ export const batchDeleteSchema = z.object({
   ids: z.array(z.number()).nonempty(),
 });
 
-export type TCreateUserSchema = z.infer<typeof createUserSchema>;
 export type TUpdateUserSchema = z.infer<typeof updateUserSchema>;
 export type TUserResponseSchema = z.infer<typeof userResponseSchema>;
 export type TUserQuerySchema = z.infer<typeof userQuerySchema>;

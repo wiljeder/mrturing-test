@@ -115,7 +115,6 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      {/* Only render pagination when it's provided */}
       {pagination && <DataTablePagination table={table} />}
     </div>
   );

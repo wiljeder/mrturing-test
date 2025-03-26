@@ -1,5 +1,4 @@
 import { Hono } from "hono";
-import { createUserController } from "../controllers/users/createUser.controller.ts";
 import { getUsersController } from "../controllers/users/getUsers.controller.ts";
 import { updateUserController } from "../controllers/users/updateUser.controller.ts";
 import { getMyUserController } from "../controllers/users/getMyUser.controller.ts";
@@ -8,7 +7,6 @@ import { userMiddleware } from "../middlewares/auth.middleware.ts";
 
 export const userRoutes = new Hono();
 
-userRoutes.post("/", createUserController);
 userRoutes.get("/", getUsersController);
 
 userRoutes.get("/me", userMiddleware, getMyUserController);

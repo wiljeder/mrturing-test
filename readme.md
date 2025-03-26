@@ -38,6 +38,16 @@ This is a full-stack web application with a Deno + Hono backend and a Deno + Rea
 deno run configure
 ```
 
+3. Run the application:
+
+```bash
+deno run dev
+```
+
+The frontend will be available at [`http://localhost:5173`](http://localhost:5173) and the backend at [`http://localhost:3000`](http://localhost:3000)
+
+The swagger documentation will be available at [`http://localhost:3000/docs`](http://localhost:3000/docs)
+
 ## Features
 
 ### Authentication
@@ -58,7 +68,3 @@ The application includes a complete authentication system:
 - Organization creation via dialog
 - Organization user management
 - Organization settings
-
-## API Documentation
-
-The swagger documentation is available at `http://localhost:3000/api/docs`

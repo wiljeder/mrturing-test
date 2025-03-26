@@ -1,15 +1,15 @@
 import { Context } from "hono";
-import { createUserSchema } from "../../models/users.model.ts";
+import { registerSchema } from "../../models/auth.model.ts";
 import { db } from "../../db/index.ts";
 import { users } from "../../db/schema/index.ts";
 import { eq } from "drizzle-orm/expressions";
 import { hashPassword } from "../../utils/hashing.ts";
 
-export async function createUserController(c: Context) {
+export async function registerController(c: Context) {
   try {
     const body = await c.req.json();
 
-    const result = createUserSchema.safeParse(body);
+    const result = registerSchema.safeParse(body);
     if (!result.success) {
       return c.json(
         { message: "Invalid input", errors: result.error.errors },

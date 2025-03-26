@@ -134,11 +134,11 @@ paths:
                   user:
                     $ref: "#/components/schemas/User"
 
-  /api/users:
+  /api/auth/register:
     post:
-      summary: Create new user
+      summary: Register user
       tags:
-        - Users
+        - Auth
       requestBody:
         required: true
         content:
@@ -153,6 +153,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/User"
 
+  /api/users:
     get:
       summary: Get users list
       tags:

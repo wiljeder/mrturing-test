@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { CreateUserRequest } from "../../types/index.ts";
+import { RegisterRequest } from "../../types/index.ts";
 import { axiosInstance } from "../../lib/axios.ts";
 
-const register = async (data: CreateUserRequest) => {
-  const response = await axiosInstance.post("/users", data);
+const register = async (data: RegisterRequest) => {
+  const response = await axiosInstance.post("/auth/register", data);
   return response.data;
 };
 

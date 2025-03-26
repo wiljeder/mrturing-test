@@ -21,7 +21,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface CreateUserRequest {
+export interface RegisterRequest {
   name: string;
   email: string;
   password: string;
