@@ -22,7 +22,6 @@ interface DataTablePaginationProps<TData> {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
-  // Check if row selection is enabled and if the rowSelection state exists
   const hasRowSelection =
     table.options.enableRowSelection !== undefined &&
     table.getState().rowSelection !== undefined;

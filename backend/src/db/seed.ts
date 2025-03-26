@@ -3,7 +3,6 @@ import { db } from "./index.ts";
 import { users, organizations, userOrganizations } from "./schema/index.ts";
 import { hashPassword } from "../utils/hashing.ts";
 
-// Configuration
 const USERS_COUNT = 25;
 const ORGANIZATIONS_COUNT = 100;
 const USER_ORGANIZATIONS_MIN = 35;
@@ -12,7 +11,6 @@ const USER_ORGANIZATIONS_MAX = 100;
 async function seed() {
   console.log("🌱 Starting database seeding...");
 
-  // Clear existing data (optional - comment out if you don't want to clear the DB)
   console.log("Clearing existing data...");
   await db.delete(userOrganizations);
   await db.delete(organizations);
@@ -80,17 +78,14 @@ async function seed() {
   console.log("Creating user-organization relationships...");
 
   for (const user of createdUsers) {
-    // Determine how many organizations this user will belong to
     const orgCount = faker.number.int({
       min: USER_ORGANIZATIONS_MIN,
       max: Math.min(USER_ORGANIZATIONS_MAX, ORGANIZATIONS_COUNT),
     });
 
-    // Get random organizations for this user
     const shuffledOrgs = faker.helpers.shuffle([...createdOrganizations]);
     const userOrgs = shuffledOrgs.slice(0, orgCount);
 
-    // Select one random organization to be active
     const activeOrgIndex = faker.number.int({
       min: 0,
       max: userOrgs.length - 1,
@@ -99,8 +94,6 @@ async function seed() {
     for (let i = 0; i < userOrgs.length; i++) {
       const org = userOrgs[i];
 
-      // If user is the owner, they're automatically active
-      // Otherwise, only one organization is active per user
       const isActive = org.ownerId === user.id || i === activeOrgIndex;
 
       await db
@@ -117,7 +110,6 @@ async function seed() {
   console.log("✅ Database seeding completed successfully!");
 }
 
-// Run the seed function
 seed().catch((e) => {
   console.error("❌ Error seeding database:", e);
   Deno.exit(1);

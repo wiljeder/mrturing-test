@@ -30,13 +30,13 @@ This is a full-stack web application with a Deno + Hono backend and a Deno + Rea
 
 ### Steps
 
-1. Configure the application - install dependencies, run postgres on docker, apply migrations and seed database:
+1. Create a `.env` files on both frontend and backend folder, based on the provided template
+
+2. Configure the application - install dependencies, run postgres on docker, apply migrations and seed database:
 
 ```bash
 deno run configure
 ```
-
-2. Create a `.env` files on both frontend and backend folder, based on the provided template
 
 ## Features
 

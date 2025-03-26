@@ -51,7 +51,6 @@ export function DataTable<TData, TValue>({
     onPaginationChange: pagination?.onPaginationChange,
   });
 
-  // Check if row selection is enabled
   const hasRowSelection = selection !== undefined;
 
   return (

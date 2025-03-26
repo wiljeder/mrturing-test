@@ -101,7 +101,6 @@ const createAuthMiddleware = (options: AuthOptions = {}) => {
   };
 };
 
-// Convenience exports for common auth combinations
 export const userMiddleware = createAuthMiddleware({ requireUser: true });
 export const organizationMiddleware = createAuthMiddleware({
   requireUser: true,
