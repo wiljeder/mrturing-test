@@ -4,7 +4,8 @@
     "start": "deno task backend:start",
     "backend:dev": "cd backend && deno task dev",
     "backend:start": "cd backend && deno task start",
-    "frontend:dev": "cd frontend && deno task dev"
+    "frontend:dev": "cd frontend && deno task dev",
+    "configure": "cd backend && deno i && deno run compose:up && deno run db:migrate && deno run db:seed && cd ../frontend && deno i"
   },
   "imports": {
     "concurrently": "npm:concurrently@^9.1.2"
