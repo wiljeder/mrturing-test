@@ -6,6 +6,7 @@ import { deleteOrganizationController } from "../controllers/organizations/delet
 import { setActiveOrganizationController } from "../controllers/organizations/setActiveOrganization.controller.ts";
 import { addUserToOrganizationController } from "../controllers/organizations/addUserToOrganization.controller.ts";
 import { getOrganizationUsersController } from "../controllers/organizations/getOrganizationUsers.controller.ts";
+import { getActiveOrganizationController } from "../controllers/organizations/getActiveOrganization.controller.ts";
 import {
   userMiddleware,
   organizationMiddleware,
@@ -17,6 +18,11 @@ export const organizationRoutes = new Hono();
 
 organizationRoutes.post("/", userMiddleware, createOrganizationController);
 organizationRoutes.get("/", userMiddleware, getOrganizationsController);
+organizationRoutes.get(
+  "/active",
+  userMiddleware,
+  getActiveOrganizationController
+);
 organizationRoutes.put(
   "/",
   organizationOwnerMiddleware,
