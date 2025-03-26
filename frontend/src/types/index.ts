@@ -11,6 +11,7 @@ export interface Organization {
   name: string;
   description: string;
   ownerId: number;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }

@@ -4,7 +4,7 @@ import { useCurrentUser } from "@/services/auth/getCurrentUser.ts";
 import { useEffect } from "react";
 
 export function useAnonymous({
-  redirectTo = "/",
+  redirectTo = "/dashboard",
 }: { redirectTo?: string } = {}) {
   const navigate = useNavigate();
   const { token } = useUserStore();
