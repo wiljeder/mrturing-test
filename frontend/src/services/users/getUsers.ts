@@ -18,7 +18,7 @@ export const getUsers = async (params: GetUsersParams = {}) => {
 
 export function useUsers(params: GetUsersParams = {}) {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", params],
     queryFn: () => getUsers(params),
     placeholderData: keepPreviousData,
   });

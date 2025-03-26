@@ -17,7 +17,6 @@ import { useCallback, useState } from "react";
 import { RowSelectionState } from "@tanstack/react-table";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -25,13 +24,10 @@ import {
   FormItem,
 } from "@/components/ui/form.tsx";
 import { RemoveUsersFromOrganizationDialog } from "./RemoveUsersFromOrganizationDialog.tsx";
-
-const searchSchema = z.object({
-  name: z.string().optional(),
-  email: z.string().optional(),
-});
-
-type TSearchSchema = z.infer<typeof searchSchema>;
+import {
+  TUserSearchSchema,
+  userSearchSchema,
+} from "@/schemas/userSearch.schema.ts";
 
 export function OrganizationUsers() {
   const navigate = useNavigate();
@@ -42,12 +38,8 @@ export function OrganizationUsers() {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [isRemoveDialogOpen, setIsRemoveDialogOpen] = useState(false);
 
-  const form = useForm<TSearchSchema>({
-    resolver: zodResolver(searchSchema),
-    defaultValues: {
-      name: search.name || "",
-      email: search.email || "",
-    },
+  const form = useForm<TUserSearchSchema>({
+    resolver: zodResolver(userSearchSchema),
   });
 
   const organizationUsers = useOrganizationUsers({
@@ -63,7 +55,7 @@ export function OrganizationUsers() {
   );
 
   const onSearchSubmit = useCallback(
-    (data: TSearchSchema) => {
+    (data: TUserSearchSchema) => {
       navigate({
         search: {
           ...search,

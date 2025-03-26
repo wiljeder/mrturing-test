@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@faker-js/faker": "npm:@faker-js/faker@^9.6.0",
     "@hono/swagger-ui": "npm:@hono/swagger-ui@^0.5.1",
     "@types/pg": "npm:@types/pg@^8.11.11",
     "drizzle-kit": "npm:drizzle-kit@^0.30.5",
@@ -14,7 +15,8 @@
     "compose:up": "docker compose up -d",
     "db:push": "deno --env -A --node-modules-dir npm:drizzle-kit push",
     "db:generate": "deno --env -A --node-modules-dir npm:drizzle-kit generate",
-    "db:migrate": "deno --env -A --node-modules-dir npm:drizzle-kit migrate"
+    "db:migrate": "deno --env -A --node-modules-dir npm:drizzle-kit migrate",
+    "db:seed": "deno run --env -A src/db/seed.ts"
   },
   "compilerOptions": {
     "jsx": "precompile",

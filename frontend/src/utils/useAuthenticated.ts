@@ -1,13 +1,7 @@
 import { useUserStore, resetUserStore } from "@/stores/user.store.ts";
 import { useNavigate } from "@tanstack/react-router";
 import { useCurrentUser } from "@/services/auth/getCurrentUser.ts";
-// @ts-types="react"
-import {
-  // @ts-types="react"
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export function useAuthenticated({
   redirectTo = "/login",
